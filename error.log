@@ -1,0 +1,75 @@
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 762-501-251
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://192.168.18.104:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:192.168.18.104 - - [14/Jun/2022 10:21:57] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 762-501-251
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://192.168.18.104:5000/ (Press CTRL+C to quit)
+INFO:test:Successful logging
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:22:09] "GET /successful HTTP/1.1" 200 -
+INFO:test:Successful logging
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:22:12] "GET /successful HTTP/1.1" 200 -
+INFO:test:Successful logging
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:22:13] "GET /successful HTTP/1.1" 200 -
+INFO:test:Successful logging
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:22:13] "GET /successful HTTP/1.1" 200 -
+INFO:test:Successful logging
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:22:14] "GET /successful HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\Jowett\\Documents\\GitHub\\testApplication\\test.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 762-501-251
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://192.168.18.104:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 762-501-251
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://192.168.18.104:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:22:58] "GET /successful HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\Jowett\\Documents\\GitHub\\testApplication\\test.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 762-501-251
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://192.168.18.104:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:24:49] "GET /successful HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:25:06] "GET /long/successful HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\Jowett\\Documents\\GitHub\\testApplication\\test.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 762-501-251
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://192.168.18.104:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Detected change in 'C:\\Users\\Jowett\\Documents\\GitHub\\testApplication\\test.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 762-501-251
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://192.168.18.104:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:27:41] "[31m[1mGET /unsuccessful HTTP/1.1[0m" 400 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\Jowett\\Documents\\GitHub\\testApplication\\test.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 762-501-251
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://192.168.18.104:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:31:04] "GET /random HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:31:06] "GET /random HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:31:08] "[31m[1mGET /random HTTP/1.1[0m" 400 -
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:31:09] "GET /random HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2022 10:31:10] "[31m[1mGET /random HTTP/1.1[0m" 400 -
