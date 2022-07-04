@@ -11,14 +11,14 @@ import time
 app = Flask(__name__)
 
 # for tas platform
-servicekeyUri = "mysql+mysqlconnector://e4b69193154f41088c8e867fca9d1ce6:he4bdvj8q4dqa8zo@ef675a66-b071-4230-a80f-8e15fae65f04.mysql.service.internal:3306/service_instance_db"
-app.config['SQLALCHEMY_DATABASE_URI'] = servicekeyUri
+# servicekeyUri = "mysql+mysqlconnector://e4b69193154f41088c8e867fca9d1ce6:he4bdvj8q4dqa8zo@ef675a66-b071-4230-a80f-8e15fae65f04.mysql.service.internal:3306/service_instance_db"
+# app.config['SQLALCHEMY_DATABASE_URI'] = servicekeyUri
 
 # for docker
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root@host.docker.internal:3306/mydb_shop"
 
 # for localhost
-# app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or "mysql+mysqlconnector://testuser:testpass@localhost:3306/mydb_shop"
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or "mysql+mysqlconnector://testuser:testpass@localhost:3306/mydb_shop"
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -87,7 +87,50 @@ def createShop():
         }
         )
 
-        
+# update shop
+@app.route('/shop', methods=['put'])
+def updateShop():
+    data = request.get_json()
+    shop_update = Shop.query.filter_by(shop_id=data["shop_id"]).first()
+    # print(exist_shop)
+    if shop_update == None:
+        return jsonify({
+            
+                "code": 400,
+                "msg": "Shop id doesn't exist"
+            
+        })
+    else:
+        shop_update.shop_name = data["shop_name"]
+        shop_update.location = data["location"]
+        # db.session.add(new_shop)
+        db.session.commit()
+        return jsonify({
+            "code": 200,
+            "msg" : "Successful"
+        }
+        )
+    
+# delete shop
+@app.route('/shop', methods=['delete'])
+def deleteShop():
+    data = request.get_json()
+    shop_delete = Shop.query.filter_by(shop_id=data["shop_id"]).first()
+    # print(exist_shop)
+    if shop_delete == None:
+        return jsonify({
+                "code": 400,
+                "msg": "Shop id doesn't exist"
+            
+        })
+    else:
+        db.session.delete(shop_delete)
+        db.session.commit()
+        return jsonify({
+            "code": 200,
+            "msg" : "Successful"
+        }
+        )
 
 
 @app.route('/test', methods=['GET'])
