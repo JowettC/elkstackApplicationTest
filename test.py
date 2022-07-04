@@ -48,8 +48,26 @@ db.create_all()
 # create shop table 
 
 # get all shop 
+@app.route('/shop/<int:shop_id>', methods=['GET'])
+def getShops(shop_id):
+    shop = Shop.query.filter_by(shop_id=shop_id).first()
+    if shop != None:
+       return jsonify(
+           {
+               "code": 200,
+               "data": shop.json()
+           }
+       )
+    return jsonify(
+       {
+           "code": 404,
+           "message": "There are no shops."
+       }
+   ), 404
+
+# get all shop 
 @app.route('/shop', methods=['GET'])
-def getShops():
+def getShop():
     ShopList = Shop.query.all()
     if len(ShopList):
        return jsonify(
@@ -64,6 +82,7 @@ def getShops():
            "message": "There are no shops."
        }
    ), 404
+
 
 @app.route('/shop', methods=['post'])
 def createShop():
@@ -165,4 +184,4 @@ def test():
 if __name__ == '__main__':
     # import logging
     # logging.basicConfig(filename='error.log',level=logging.DEBUG)
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
