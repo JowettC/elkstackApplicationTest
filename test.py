@@ -112,11 +112,9 @@ def updateShop():
         )
     
 # delete shop
-@app.route('/shop', methods=['delete'])
-def deleteShop():
-    data = request.get_json()
-    shop_delete = Shop.query.filter_by(shop_id=data["shop_id"]).first()
-    # print(exist_shop)
+@app.route('/shop/<int:shop_id>', methods=['delete'])
+def deleteShop(shop_id):
+    shop_delete = Shop.query.filter_by(shop_id=shop_id).first()
     if shop_delete == None:
         return jsonify({
                 "code": 400,
