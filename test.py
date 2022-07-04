@@ -15,10 +15,10 @@ app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = servicekeyUri
 
 # for docker
-# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root@host.docker.internal:3306/mydb_shop"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root@host.docker.internal:3306/mydb_shop"
 
 # for localhost
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or "mysql+mysqlconnector://testuser:testpass@localhost:3306/mydb_shop"
+# app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or "mysql+mysqlconnector://testuser:testpass@localhost:3306/mydb_shop"
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -154,32 +154,6 @@ def deleteShop(shop_id):
 def test():
     return "testing api endpoint"
 
-
-# @app.route('/successful', methods=['GET'])
-# def test1():
-#     # app.logger.info('Successful logging')
-#     return "Successful logging!"
-
-
-# @app.route('/unsuccessful', methods=['GET'])
-# def test2():
-#     # app.logger.info('Unsuccessful logging')
-#     return "Unsuccessful logging!",400
-    
-# @app.route('/long/successful', methods=['GET'])
-# def test3():
-#     # app.logger.info('Unsuccessful logging')
-#     time.sleep(5)
-#     return "5 second wait successful"
-
-# @app.route('/random', methods=['GET'])
-# def test4():
-#     # app.logger.info('Unsuccessful logging')
-#     value = randint(0,10)
-#     if value > 5:
-#         return "Successful logging!"
-#     else:
-#         return "Unsuccessful logging!",400
 
 if __name__ == '__main__':
     # import logging

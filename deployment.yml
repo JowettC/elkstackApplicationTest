@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopms
+  labels:
+    app: shopms
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: shopms
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 2
+  template:
+    metadata:
+      labels:
+        app: shopms
+        tier: service
+    spec:
+      containers:
+      - name: shopms
+        image: "jowettc/shopms"
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "125m"
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 5000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 5
+          timeoutSeconds: 5       
+        env:
+        - name: PORT
+          value: "5000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopms
+  labels:
+    app: shopms
+    tier: service
+spec:
+  type: NodePort
+  ports:
+  - port: 5000
+  selector:
+    app: shopms
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: shopms
+  labels:
+    app: shopms
+    tier: backend
+spec:
+  backend:
+    serviceName: shopms
+    servicePort: 5000
