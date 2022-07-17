@@ -3,8 +3,13 @@ from random import randint
 from os import environ
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+import os
+import uuid
+import requests;
 
-import time
+
+instance_id = uuid.uuid4().hex
+# import time
 
 # constructor 
 
@@ -15,10 +20,19 @@ app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = servicekeyUri
 
 # for docker
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root@host.docker.internal:3306/mydb_shop"
+# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root@host.docker.internal:3306/mydb_shop"
 
 # for localhost
+# user = "root"
 # app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or "mysql+mysqlconnector://testuser:testpass@localhost:3306/mydb_shop"
+
+# # for k8s
+
+
+pw = os.getenv("db_root_password") or ""
+# db= environ.get("db_name") or "mydb_shop"
+host = environ.get("MYSQL_SERVICE_HOST") or "host.docker.internal"
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or "mysql+mysqlconnector://root:"+pw+"@mysql:3306/mydb_shop"
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -45,6 +59,21 @@ class Shop(db.Model):
         }
 db.create_all()
 
+# kubectl rollout restart -n default deployment flaskapi-deployment-jowett
+# test route
+@app.route('/', methods=['GET'])
+def test2():
+    # print("running api")
+    # x = requests.get('http://google.com')
+    # print(x)
+    return "Running: " + instance_id
+
+@app.route('/123', methods=['GET'])
+def test3():
+    print("running api")
+    return "new end point"
+
+
 # create shop table 
 
 # get all shop 
@@ -69,19 +98,19 @@ def getShops(shop_id):
 @app.route('/shop', methods=['GET'])
 def getShop():
     ShopList = Shop.query.all()
-    if len(ShopList):
-       return jsonify(
-           {
-               "code": 200,
-               "data": [shop.json() for shop in ShopList]
-           }
-       )
+    # if len(ShopList):
     return jsonify(
-       {
-           "code": 404,
-           "message": "There are no shops."
-       }
-   ), 404
+        {
+            "code": 200,
+            "data": [shop.json() for shop in ShopList]
+        }
+    )
+#     return jsonify(
+#        {
+#            "code": 404,
+#            "message": "There are no shops."
+#        }
+#    ), 404
 
 
 @app.route('/shop', methods=['post'])
@@ -158,4 +187,4 @@ def test():
 if __name__ == '__main__':
     # import logging
     # logging.basicConfig(filename='error.log',level=logging.DEBUG)
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True,)

@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskapi-deployment-jowett
+  labels:
+    app: flaskapi-jowett
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaskapi-jowett
+  template:
+    metadata:
+      labels:
+        app: flaskapi-jowett
+    spec:
+      containers:
+        - name: flaskapi-jowett
+          image: flask-api-jowett
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          env:
+            - name: db_root_password
+              valueFrom:
+                secretKeyRef:
+                  name: flaskapi-secrets
+                  key: db_root_password
+            - name: db_name
+              value: mydb_shop
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service-jowett
+spec:
+  ports:
+  - port: 5000
+    targetPort: 5000
+    name: flask-service-jowett
+  selector:
+    app: flaskapi-jowett
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-service
+spec:
+  ports:
+  - port: 5000
+    targetPort: 5000
+    name: flask-app-service
+  selector:
+    app: flaskapi-jowett
+  type: ClusterIP
