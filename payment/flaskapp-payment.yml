@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-deployment-jowett
+  labels:
+    app: payment-jowett
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-jowett
+  template:
+    metadata:
+      labels:
+        app: payment-jowett
+    spec:
+      containers:
+        - name: payment-jowett
+          image: jowettc/flask-payment-jowett
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          env:
+            - name: db_root_password
+              valueFrom:
+                secretKeyRef:
+                  name: flaskapi-secrets
+                  key: db_root_password
+            - name: db_name
+              value: mydb_shop
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-service-jowett
+spec:
+  ports:
+  - port: 5000
+    targetPort: 5000
+    name: payment-service-jowett
+  selector:
+    app: payment-jowett
+  type: ClusterIP
+

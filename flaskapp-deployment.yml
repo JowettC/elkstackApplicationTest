@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
         - name: flaskapi-jowett
-          image: flask-api-jowett
-          imagePullPolicy: Never
+          image: jowettc/flask-api-jowett
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:
@@ -44,16 +44,16 @@ spec:
     app: flaskapi-jowett
   type: ClusterIP
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: flask-app-service
-spec:
-  ports:
-  - port: 5000
-    targetPort: 5000
-    name: flask-app-service
-  selector:
-    app: flaskapi-jowett
-  type: ClusterIP
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: flask-app-service
+# spec:
+#   ports:
+#   - port: 5000
+#     targetPort: 5000
+#     name: flask-app-service
+#   selector:
+#     app: flaskapi-jowett
+#   type: ClusterIP

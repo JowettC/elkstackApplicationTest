@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontendapp-deployment-jowett
+  labels:
+    app: frontendapp-jowett
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontendapp-jowett
+  template:
+    metadata:
+      labels:
+        app: frontendapp-jowett
+    spec:
+      containers:
+        - name: frontendapp-jowett
+          image: jowettc/frontend-jowett
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service-jowett
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: frontendapp-jowett
+  type: ClusterIP

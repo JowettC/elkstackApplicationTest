@@ -63,15 +63,12 @@ db.create_all()
 # test route
 @app.route('/', methods=['GET'])
 def test2():
-    # print("running api")
-    # x = requests.get('http://google.com')
-    # print(x)
     return "Running: " + instance_id
 
-@app.route('/123', methods=['GET'])
+@app.route('/version', methods=['GET'])
 def test3():
-    print("running api")
-    return "new end point"
+
+    return "running version 2.0.1 - 250722"
 
 
 # create shop table 
